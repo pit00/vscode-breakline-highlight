@@ -1,0 +1,219 @@
+{
+  "name": "vscode-betterWhitespaceV2",
+  "displayName": "Better Whitespace v2",
+  "description": "Sublime-like whitespace rendering with color gradients on selection",
+  "version": "1.0.0",
+  "publisher": "rioj7",
+  "engines": { "vscode": "^1.62.0" },
+  "categories": ["Other"],
+  "keywords": ["whitespace","tab","space","show","gradient","selection"],
+  "activationEvents": ["*"],
+  "license": "MIT",
+  "main": "./betterWhiteSpace",
+  "browser": "./betterWhiteSpace",
+  "icon": "assets/icon.png",
+  "contributes": {
+    "configuration": {
+      "title": "BetterWhitespaceV2",
+      "properties": {
+        "betterWhitespaceV2.space.gradient.angle": {
+          "type": "integer",
+          "default": 0,
+          "enum": [0,45,90,135,180,215,270,315],
+          "description": "Space Gradient Angle (degrees)"
+        },
+        "betterWhitespaceV2.tab.gradient.angle": {
+          "type": "integer",
+          "default": 90,
+          "enum": [0,45,90,135,180,215,270,315],
+          "description": "Tab Gradient Angle (degrees)"
+        },
+        "betterWhitespaceV2.space.gradient.width": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Space Gradient Width (%)"
+        },
+        "betterWhitespaceV2.space.gradient.height": {
+          "type": "integer",
+          "default": 40,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Space Gradient Height (%)"
+        },
+        "betterWhitespaceV2.tab.gradient.width": {
+          "type": "integer",
+          "default": 95,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Tab Gradient Width (%)"
+        },
+        "betterWhitespaceV2.tab.gradient.height": {
+          "type": "integer",
+          "default": 20,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Tab Gradient Height (%)"
+        },
+        "betterWhitespaceV2.colors": {
+          "type": "object",
+          "description": "Colors for the gradient",
+          "default": {},
+          "properties": {
+            "color" : {
+              "type": "string",
+              "format": "color",
+              "default": "#dc143cb3",
+              "description": "Space and Tab color default"
+            },
+            "space" : {
+              "type": "string",
+              "format": "color",
+              "default": "#dc143cb3",
+              "description": "Space (From) color"
+            },
+            "space.to" : {
+              "type": "string",
+              "format": "color",
+              "default": "#dc143cb3",
+              "description": "Space To color"
+            },
+            "tab" : {
+              "type": "string",
+              "format": "color",
+              "default": "#dc143cb3",
+              "description": "Tab (From) color"
+            },
+            "tab.to" : {
+              "type": "string",
+              "format": "color",
+              "default": "#dc143cb3",
+              "description": "Tab To color"
+            },
+            "light": {
+              "type": "object",
+              "description": "Colors for Light Themes",
+              "default": {},
+              "properties": {
+                "color" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space and Tab color default"
+                },
+                "space" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space (From) color"
+                },
+                "space.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space To color"
+                },
+                "tab" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab (From) color"
+                },
+                "tab.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab To color"
+                }
+              }
+            },
+            "dark": {
+              "type": "object",
+              "description": "Colors for Dark Themes",
+              "default": {},
+              "properties": {
+                "color" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space and Tab color default"
+                },
+                "space" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space (From) color"
+                },
+                "space.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space To color"
+                },
+                "tab" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab (From) color"
+                },
+                "tab.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab To color"
+                }
+              }
+            }
+          },
+          "patternProperties": {
+            "^\\[.+\\]$": {
+              "type": "object",
+              "description": "Colors for a Theme with that name",
+              "properties": {
+                "color" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space and Tab color default"
+                },
+                "space" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space (From) color"
+                },
+                "space.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Space To color"
+                },
+                "tab" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab (From) color"
+                },
+                "tab.to" : {
+                  "type": "string",
+                  "format": "color",
+                  "default": "#dc143cb3",
+                  "description": "Tab To color"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "repository": {
+    "url": "https://github.com/rioj7/vscode-betterWhiteSpaceV2.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/rioj7/vscode-betterWhiteSpaceV2/issues"
+  },
+  "homepage": "https://github.com/rioj7/vscode-betterWhiteSpaceV2"
+}
