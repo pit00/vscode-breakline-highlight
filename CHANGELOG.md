@@ -1,4 +1,5 @@
 # Change Log
 
-## [1.0.0] - 2023-01-01
+## [1.0.0]
+
 - First release
