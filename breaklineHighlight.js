@@ -4,10 +4,42 @@ const extensionShortName = 'breaklineHighlight';
 
 function activate(context) {
   const whiteSpace = new WhiteSpace();
-  vscode.workspace.onDidChangeConfiguration( configevent => {
-    if (configevent.affectsConfiguration(extensionShortName) || configevent.affectsConfiguration('editor') || configevent.affectsConfiguration('workbench')) { whiteSpace.updateConfigurations(); }
+
+  vscode.workspace.onDidChangeConfiguration(configevent => {
+    if (
+      configevent.affectsConfiguration(extensionShortName) ||
+      configevent.affectsConfiguration('editor') ||
+      configevent.affectsConfiguration('workbench')
+    ) {
+      whiteSpace.updateConfigurations();
+    }
   }, null, context.subscriptions);
-  vscode.window.onDidChangeTextEditorSelection( changeEvent => { whiteSpace.updateEditor(changeEvent.textEditor); }, null, context.subscriptions);
+
+  vscode.window.onDidChangeTextEditorSelection(changeEvent => {
+    whiteSpace.updateEditor(changeEvent.textEditor);
+  }, null, context.subscriptions);
+
+  // --- EOL change detection ---
+  let lastEol = vscode.window.activeTextEditor?.document.eol;
+
+  vscode.window.onDidChangeActiveTextEditor(editor => {
+    if (editor) {
+      if (lastEol !== editor.document.eol) {
+        whiteSpace.updateConfigurations();
+      }
+      lastEol = editor.document.eol;
+    }
+  }, null, context.subscriptions);
+
+  vscode.workspace.onDidSaveTextDocument(document => {
+    const editor = vscode.window.activeTextEditor;
+    if (editor && document === editor.document) {
+      if (lastEol !== document.eol) {
+        whiteSpace.updateConfigurations();
+      }
+      lastEol = document.eol;
+    }
+  }, null, context.subscriptions);
 }
 
 class WhiteSpace {
@@ -24,11 +56,20 @@ class WhiteSpace {
     this.clearDecorations();
     let config = vscode.workspace.getConfiguration(extensionShortName);
     
-    // const colors = configurations.get("colors");
+    let editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      return;
+    }
+    
+    let text = config.get("lf.text")
+    if (editor.document.eol === vscode.EndOfLine.CRLF) {
+      text = config.get("crlf.text")
+    }
     
     this.breaklineDecoration = vscode.window.createTextEditorDecorationType({
       before: {
-        contentText: config.get("text"),
+        width: "0",
+        contentText: text,
         color: config.get("color")
       },
     });

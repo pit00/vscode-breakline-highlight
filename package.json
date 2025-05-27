@@ -2,7 +2,7 @@
   "name": "vscode-breakline-highlight",
   "displayName": "Breakline Highlight",
   "description": "Selection highlight for breaklines",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "pit00",
   "engines": { "vscode": "^1.62.0" },
   "categories": ["Other"],
@@ -21,10 +21,15 @@
           "default": "#DC143CB3",
           "description": "Color of char"
         },
-        "breaklineHighlight.text": {
+        "breaklineHighlight.lf.text": {
             "type": "string",
             "default": "⇩",
-            "description": "Text of char"
+            "description": "Text of LF char"
+        },
+        "breaklineHighlight.crlf.text": {
+            "type": "string",
+            "default": "⏎",
+            "description": "Text of CRLF chars"
         }
       }
     }
